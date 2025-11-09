@@ -6,19 +6,33 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() =>{
-        setIsLoading(false);
-    }, 1000)
-  });
+    // Wait for all resources (including images) to load
+    const handleLoad = () => {
+      setIsLoading(false);
+    };
+
+    if (document.readyState === "complete") {
+      // If page already loaded (like on fast reload)
+      handleLoad();
+    } else {
+      // Otherwise wait for the load event
+      window.addEventListener("load", handleLoad);
+    }
+
+    return () => window.removeEventListener("load", handleLoad);
+  }, []);
+
   return (
     <>
       {isLoading ? (
-        <Box sx={{
-            textAlign: 'center',
-            alignContent: 'center',
-            height: '100%'
-        }}>
-            <CircularProgress size={65} sx={{color: '#E25C07'}} />
+        <Box
+          sx={{
+            textAlign: "center",
+            alignContent: "center",
+            height: "100%",
+          }}
+        >
+          <CircularProgress size={65} sx={{ color: "#E25C07" }} />
         </Box>
       ) : (
         <Grid
