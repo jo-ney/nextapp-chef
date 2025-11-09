@@ -132,6 +132,8 @@ export default function HomePage() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     lineHeight: { xs: "60px", md: "100px" },
+                    textRendering: "optimizeLegibility",
+                    WebkitFontSmoothing: "antialiased",
                   }}
                 >
                   Cooking Our Website.
